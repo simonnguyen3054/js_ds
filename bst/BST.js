@@ -24,7 +24,7 @@ class BST {
     //         }
 
     //         current.right = newNode; //once we reached the last current node, we point the current.right to the new node
-    //     } else { 
+    //     } else {
     //         while(current.left !== null) { //do the same for left node
     //             current = current.left;
     //         }
@@ -32,9 +32,9 @@ class BST {
     //         current.left = newNode;
     //     }
 
-        
-    // }   
-    
+
+    // }
+
     insert(val) {
         //create a new node
         let newNode = new Node(val);
@@ -62,7 +62,7 @@ class BST {
                     } else {
                         current = current.right;
                     }
-                }   
+                }
             }
         }
     }
@@ -72,7 +72,7 @@ class BST {
         //first check if there's a root, if not we're done searching
         if(!current) {
             return null;
-        } 
+        }
 
         while(true) {
             if(val < current.val) { //if searching val is less than current val
@@ -97,6 +97,28 @@ class BST {
         }
     }
 
+    //print all nodes using breadth first search technique
+    //Traverse from the root and print nodes from left to right on each depth
+    //Use queue technique to store the nodes to be added to the result array
+    BFS() {
+      let node = this.root;
+      let data = [];
+      let queue = [];
+
+      //push the root node to the queue
+      queue.push(node);
+      while(queue.length) { //while there is node waiting in the queue (FIFO) to be pushed to the data arr
+        node = queue.shift(); //remove first node from the queue array
+        data.push(node.val); //push the removed node to the data arr
+
+        if(node.left) queue.push(node.left);
+
+        if(node.right) queue.push(node.right);
+      }
+
+      return data;
+    }
+
 }
 
 let tree = new BST();
@@ -114,4 +136,4 @@ tree.insert(11);
 tree.insert(16);
 
 
-console.log(tree.find(17));
+console.log(tree.BFS());
