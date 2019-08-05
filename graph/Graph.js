@@ -31,6 +31,32 @@ class Graph {
 
     delete this.adjacencyList[vertex];
   }
+
+  //traverse graph recursively
+  DFS(vertex) {
+    let results = [];
+    let visitedVertex = {};
+
+    function traverse(vertex) {
+      if (!vertex) return;
+
+      visitedVertex[vertex] = true;
+      results.push(vertex);
+
+      let vertexNeighbors = this.adjacencyList[vertex];
+
+      for (let n = 0; n < vertexNeighbors; n++) {
+        let vertexNeighbor = vertexNeighbors[n];
+        if (visitedVertex[vertexNeighbor] === undefined) {
+          traverse(vertexNeighbor);
+        }
+      }
+    }
+
+    traverse(vertex);
+
+    return results;
+  }
 }
 
 const g = new Graph();
